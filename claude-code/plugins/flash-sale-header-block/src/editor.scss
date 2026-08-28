@@ -1,0 +1,23 @@
+/**
+ * Editor-only styles (not loaded on the frontend).
+ */
+
+.wp-block-global-store-flash-sale-header {
+	min-height: 200px;
+}
+
+.gsfsh-image-control {
+
+	img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin-bottom: 0.5rem;
+		border-radius: 4px;
+	}
+
+	&__actions {
+		display: flex;
+		gap: 0.5rem;
+	}
+}

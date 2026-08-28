@@ -1,0 +1,74 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "global-store/flash-sale-header",
+	"title": "Global Store Flash Sale Header",
+	"category": "widgets",
+	"icon": "megaphone",
+	"description": "A responsive, countdown-driven flash sale header with wide, medium, and tall layouts that adapt automatically via CSS container queries.",
+	"keywords": [ "sale", "countdown", "flash sale", "promo", "header" ],
+	"version": "1.0.0",
+	"textdomain": "global-store",
+	"attributes": {
+		"size": {
+			"type": "string",
+			"enum": [ "wide", "medium", "tall" ],
+			"default": "wide"
+		},
+		"title": {
+			"type": "string",
+			"default": "The Flash Sale"
+		},
+		"subtitle": {
+			"type": "string",
+			"default": "£1 a month for 12 months"
+		},
+		"expiryDateTime": {
+			"type": "string",
+			"default": ""
+		},
+		"ctaText": {
+			"type": "string",
+			"default": "Shop Now"
+		},
+		"ctaUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"legalText": {
+			"type": "string",
+			"default": "Offer ends at the time shown. Terms and conditions apply."
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}
