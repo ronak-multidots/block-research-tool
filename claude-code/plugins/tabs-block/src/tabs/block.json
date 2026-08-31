@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "global-store/tabs",
+	"title": "Tabs",
+	"category": "design",
+	"icon": "index-card",
+	"description": "A dynamic, accessible tabs container. Each tab's title supports an icon (Dashicon or custom image) plus text, and any block can be nested inside a tab.",
+	"keywords": [ "tabs", "accordion", "toggle" ],
+	"version": "1.0.0",
+	"textdomain": "global-store-tabs",
+	"providesContext": {
+		"global-store/activeTabId": "activeTabId"
+	},
+	"attributes": {
+		"activeTabId": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

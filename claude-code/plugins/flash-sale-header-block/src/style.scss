@@ -7,38 +7,51 @@
  * honoured once the container is wide enough to support it; `is-size-tall`
  * always forces a stacked layout, since it is the explicit "narrow /
  * sidebar" choice.
+ *
+ * `.flash-sale-header` establishes the container (`container-type:
+ * inline-size`), but a query container cannot itself be styled by a query
+ * against that same container — only its descendants can. All
+ * width-dependent layout therefore lives on `.flash-sale-header__inner`,
+ * a wrapper one level down.
  */
 
 .flash-sale-header {
-	--fsh-bg: #111827;
+	--fsh-bg: #0b0e18;
 	--fsh-color: #fff;
-	--fsh-cta-bg: #fff;
-	--fsh-cta-color: #111827;
+	--fsh-muted: rgb(255 255 255 / 68%);
+	--fsh-cta-bg: #f5a623;
+	--fsh-cta-color: #14161f;
+	--fsh-font-serif: georgia, "times new roman", times, serif;
+	--fsh-font-sans: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif;
 
 	container-type: inline-size;
 	container-name: flash-sale-header;
 
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
 	overflow: hidden;
 	border-radius: 8px;
 	background: var(--fsh-bg);
 	color: var(--fsh-color);
-	padding: clamp(1rem, 3vw, 2.5rem);
+	font-family: var(--fsh-font-sans);
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+	}
 
 	&__media {
 		order: -1;
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
 		justify-content: center;
+		min-height: 220px;
+		background: var(--fsh-bg);
 	}
 
 	&__image {
 		width: 100%;
-		height: auto;
-		max-height: 280px;
-		object-fit: contain;
+		height: 100%;
+		object-fit: cover;
+		object-position: bottom;
 	}
 
 	&__media-placeholder {
@@ -47,7 +60,7 @@
 		justify-content: center;
 		min-height: 160px;
 		width: 100%;
-		border: 1px dashed rgba(255, 255, 255, 0.3);
+		border: 1px dashed rgb(255 255 255 / 30%);
 		border-radius: 8px;
 		font-size: 0.875rem;
 		opacity: 0.7;
@@ -56,26 +69,36 @@
 	&__content {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		align-items: flex-start;
+		gap: 0.4rem;
+		padding: clamp(1.25rem, 4vw, 2.5rem);
 	}
 
 	&__title {
 		margin: 0;
+		font-family: var(--fsh-font-serif);
 		font-size: clamp(1.5rem, 4vw, 2.25rem);
-		font-weight: 800;
-		line-height: 1.1;
+		font-weight: 700;
+		line-height: 1.15;
 	}
 
 	&__subtitle {
+		margin: 0 0 0.5rem;
+		font-size: 0.875rem;
+		font-weight: 700;
+	}
+
+	&__countdown-label-static {
 		margin: 0;
-		font-size: 1rem;
-		opacity: 0.9;
+		font-family: var(--fsh-font-serif);
+		font-size: 1.0625rem;
+		font-weight: 400;
 	}
 
 	&__countdown {
 		display: flex;
-		gap: 0.75rem;
-		flex-wrap: wrap;
+		gap: 1.25rem;
+		margin: 0.25rem 0 0.75rem;
 
 		&.is-expired {
 			opacity: 0.5;
@@ -85,41 +108,39 @@
 	&__countdown-unit {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		min-width: 56px;
-		padding: 0.5rem 0.25rem;
-		background: rgba(255, 255, 255, 0.12);
-		border-radius: 6px;
+		align-items: flex-start;
 	}
 
 	&__countdown-value {
-		font-size: 1.5rem;
+		font-size: 1.375rem;
 		font-weight: 700;
 		font-variant-numeric: tabular-nums;
+		line-height: 1.2;
 	}
 
 	&__countdown-label {
 		font-size: 0.6875rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		opacity: 0.75;
+		color: var(--fsh-muted);
+		line-height: 1.3;
 	}
 
 	&__countdown-placeholder {
 		font-size: 0.8125rem;
-		opacity: 0.6;
-		margin: 0;
+		color: var(--fsh-muted);
+		margin: 0.25rem 0 0.75rem;
 	}
 
 	&__cta {
-		align-self: flex-start;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.75rem 1.5rem;
-		border-radius: 999px;
-		font-weight: 600;
+		align-self: flex-start;
+		margin: 0.25rem 0 0.75rem;
+		padding: 0.7rem 1.75rem;
+		border-radius: 4px;
+		font-family: var(--fsh-font-sans);
+		font-size: 0.8125rem;
+		font-weight: 700;
 		background: var(--fsh-cta-bg);
 		color: var(--fsh-cta-color);
 		text-decoration: none;
@@ -129,8 +150,21 @@
 
 	&__legal {
 		margin: 0;
-		font-size: 0.75rem;
-		opacity: 0.6;
+		max-width: 32ch;
+		font-size: 0.6875rem;
+		line-height: 1.5;
+		color: var(--fsh-muted);
+	}
+
+	&__chevron {
+		order: 3;
+		align-self: center;
+		width: 12px;
+		height: 12px;
+		margin: 0 0 1rem;
+		border-right: 2px solid var(--fsh-muted);
+		border-bottom: 2px solid var(--fsh-muted);
+		transform: rotate(45deg);
 	}
 
 	// Card-style two-column layout once there is enough room.
@@ -138,17 +172,22 @@
 
 		&.is-size-medium,
 		&.is-size-wide {
-			flex-direction: row;
-			align-items: center;
+
+			.flash-sale-header__inner {
+				flex-direction: row;
+				align-items: stretch;
+			}
 
 			.flash-sale-header__content {
 				order: 1;
 				flex: 1 1 55%;
+				justify-content: center;
 			}
 
 			.flash-sale-header__media {
 				order: 2;
 				flex: 1 1 45%;
+				min-height: auto;
 			}
 		}
 	}
@@ -157,37 +196,59 @@
 	@container flash-sale-header ( min-width: 768px ) {
 
 		&.is-size-wide {
-			padding: clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 5vw, 4rem);
 
 			.flash-sale-header__title {
-				font-size: clamp(2rem, 3vw, 3rem);
+				font-size: clamp(2rem, 3vw, 2.75rem);
 			}
 
 			.flash-sale-header__content {
-				flex: 1 1 60%;
+				flex: 1 1 38%;
+				padding: clamp(1.5rem, 4vw, 3rem);
 			}
 
 			.flash-sale-header__media {
-				flex: 1 1 40%;
+				flex: 1 1 62%;
 			}
 		}
 	}
 
 	// Explicit "tall" choice always stacks: imagery top, content below.
 	&.is-size-tall {
-		flex-direction: column !important;
+
+		.flash-sale-header__inner {
+			flex-direction: column !important;
+		}
 
 		.flash-sale-header__content {
 			order: 2;
+			align-items: center;
+			text-align: center;
 		}
 
 		.flash-sale-header__media {
 			order: 1;
+			min-height: 260px;
+			align-items: center;
+		}
+
+		.flash-sale-header__image {
+			object-position: top;
+		}
+
+		.flash-sale-header__countdown {
+			justify-content: center;
+		}
+
+		.flash-sale-header__countdown-unit {
+			align-items: center;
 		}
 
 		.flash-sale-header__cta {
 			align-self: stretch;
-			text-align: center;
+		}
+
+		.flash-sale-header__legal {
+			max-width: none;
 		}
 	}
 }
@@ -198,8 +259,11 @@
 
 	.flash-sale-header.is-size-wide,
 	.flash-sale-header.is-size-medium {
-		flex-direction: row;
-		align-items: center;
+
+		.flash-sale-header__inner {
+			flex-direction: row;
+			align-items: stretch;
+		}
 
 		.flash-sale-header__content {
 			order: 1;
@@ -209,6 +273,7 @@
 		.flash-sale-header__media {
 			order: 2;
 			flex: 1 1 45%;
+			min-height: auto;
 		}
 	}
 }

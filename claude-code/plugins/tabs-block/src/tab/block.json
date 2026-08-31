@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "global-store/tab",
+	"title": "Tab",
+	"category": "design",
+	"icon": "index-card",
+	"description": "A single tab: an icon/image + title shown in the parent Tabs block's nav, and content that can hold any block.",
+	"keywords": [ "tab", "tabs", "accordion" ],
+	"version": "1.0.0",
+	"textdomain": "global-store-tabs",
+	"parent": [ "global-store/tabs" ],
+	"usesContext": [ "global-store/activeTabId" ],
+	"attributes": {
+		"tabId": {
+			"type": "string",
+			"default": ""
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"iconType": {
+			"type": "string",
+			"enum": [ "none", "dashicon", "image" ],
+			"default": "none"
+		},
+		"dashicon": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

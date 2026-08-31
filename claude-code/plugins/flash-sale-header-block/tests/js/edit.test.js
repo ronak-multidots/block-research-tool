@@ -95,10 +95,10 @@ describe( 'Edit', () => {
 		} );
 	} );
 
-	it( 'hides the CTA preview on the wide layout', () => {
+	it( 'shows the CTA preview on the wide layout', () => {
 		setup( { size: 'wide', ctaText: 'Shop Now' } );
 
-		expect( screen.queryByText( 'Shop Now' ) ).not.toBeInTheDocument();
+		expect( screen.getByText( 'Shop Now' ) ).toBeInTheDocument();
 	} );
 
 	it( 'shows the CTA preview on the medium layout', () => {
@@ -111,6 +111,14 @@ describe( 'Edit', () => {
 		setup( { size: 'tall', ctaText: 'Shop Now' } );
 
 		expect( screen.getByText( 'Shop Now' ) ).toBeInTheDocument();
+	} );
+
+	it( 'hides the CTA preview when no CTA text is set', () => {
+		setup( { size: 'wide', ctaText: '' } );
+
+		expect(
+			document.querySelector( '.flash-sale-header__cta' )
+		).not.toBeInTheDocument();
 	} );
 
 	it( 'prompts for an expiry date when none is set', () => {

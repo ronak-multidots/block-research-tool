@@ -22,6 +22,7 @@ tests/
   js/                         Jest + React Testing Library
   php/                        PHPUnit
   e2e/                        Playwright (@wordpress/e2e-test-utils-playwright)
+    fixtures/design-reference.png   Original design brief, kept for manual comparison
 ```
 
 ## Setup
@@ -89,4 +90,10 @@ npm run test:e2e
 ```
 
 Covers inserting the block, switching between the three layout sizes, and
-verifying the countdown renders on the published frontend.
+verifying the countdown renders on the published frontend. Also includes a
+`toHaveScreenshot()` visual-regression check per layout size (baseline
+images live in `tests/e2e/__screenshots__/` after the first run) so any
+future change to the layout/typography is caught automatically — separate
+from `tests/e2e/fixtures/design-reference.png`, the original mockup this
+block was built from, which is kept for manual side-by-side comparison
+since it uses stock photography this test suite doesn't have.

@@ -1,0 +1,98 @@
+/**
+ * Frontend + editor shared styles for the Tabs block.
+ */
+
+.tabs-block {
+	--tabs-block-accent: #e8622c;
+	--tabs-block-border: #e2e2e2;
+	--tabs-block-muted: #6b6b6b;
+	--tabs-block-text: #1e1e1e;
+
+	color: var(--tabs-block-text);
+
+	&__nav {
+		display: flex;
+		// When every tab doesn't fit the available width (small screens,
+		// many tabs, long titles), scroll horizontally rather than wrap to
+		// a second row — wrapping splits the shared bottom border across
+		// two uneven rows, which reads as broken rather than responsive.
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		gap: 2.5rem;
+		border-bottom: 1px solid var(--tabs-block-border);
+	}
+
+	&__tab-btn {
+		display: flex;
+		flex: 0 0 auto;
+		flex-direction: column;
+		align-items: center;
+		// Anchor to the bottom edge so tab labels line up on the same
+		// baseline whether or not that tab has an icon above it.
+		justify-content: flex-end;
+		gap: 0.5rem;
+		margin: 0 0 -1px;
+		padding: 0 0 0.75rem;
+		border: none;
+		border-bottom: 2px solid transparent;
+		background: none;
+		color: var(--tabs-block-muted);
+		font-size: 1rem;
+		font-weight: 600;
+		white-space: nowrap;
+		cursor: pointer;
+
+		&:hover {
+			color: var(--tabs-block-text);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--tabs-block-accent);
+			outline-offset: 2px;
+		}
+
+		&.is-active {
+			border-bottom-color: var(--tabs-block-accent);
+			color: var(--tabs-block-text);
+
+			.tabs-block__tab-icon.dashicons {
+				color: var(--tabs-block-accent);
+			}
+		}
+	}
+
+	&__tab-icon {
+		font-size: 1.5rem;
+		width: 1.5rem;
+		height: 1.5rem;
+
+		&--image {
+			object-fit: contain;
+			border-radius: 4px;
+		}
+	}
+
+	&__tab-label {
+		display: inline-block;
+	}
+
+	// Before view.js hydrates, fall back to "first tab wins" purely via CSS
+	// so nested content doesn't flash as one long unstyled stack. Scoped out
+	// of the editor (whose InnerBlocks list always carries this Gutenberg
+	// class) because there active/inactive is already driven correctly by
+	// block context — see src/tab/edit.js and src/tab/editor.scss.
+	&__panels:not(.block-editor-block-list__layout) .tabs-block__panel {
+		display: none;
+
+		&:first-of-type,
+		&.is-active {
+			display: block;
+		}
+
+		&[hidden] {
+			display: none;
+		}
+	}
+}

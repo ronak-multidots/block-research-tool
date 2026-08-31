@@ -29,7 +29,7 @@
 		},
 		"ctaText": {
 			"type": "string",
-			"default": "Shop Now"
+			"default": "Subscribe now"
 		},
 		"ctaUrl": {
 			"type": "string",
@@ -37,7 +37,7 @@
 		},
 		"legalText": {
 			"type": "string",
-			"default": "Offer ends at the time shown. Terms and conditions apply."
+			"default": "£1 a month for 12 months, £10 a month thereafter. This trial offer is only available to readers outside of the UK and excludes current subscribers."
 		},
 		"imageId": {
 			"type": "number",

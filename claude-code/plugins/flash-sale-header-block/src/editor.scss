@@ -4,6 +4,22 @@
 
 .wp-block-global-store-flash-sale-header {
 	min-height: 200px;
+
+	// The editor preview CTA renders as a real @wordpress/components Button
+	// (for accessible focus/hover states); force it back to the frontend look
+	// rather than the default WP "primary" button styling.
+	.flash-sale-header__cta.is-editor-preview {
+		background: var(--fsh-cta-bg);
+		color: var(--fsh-cta-color);
+		border-radius: 4px;
+		box-shadow: none;
+
+		&:hover,
+		&:focus {
+			background: var(--fsh-cta-bg);
+			color: var(--fsh-cta-color);
+		}
+	}
 }
 
 .gsfsh-image-control {

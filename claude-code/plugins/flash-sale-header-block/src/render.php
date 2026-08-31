@@ -26,7 +26,7 @@ $legal_text  = isset( $attributes['legalText'] ) ? wp_kses_post( $attributes['le
 
 $cta_text = isset( $attributes['ctaText'] ) ? sanitize_text_field( $attributes['ctaText'] ) : '';
 $cta_url  = isset( $attributes['ctaUrl'] ) ? esc_url_raw( $attributes['ctaUrl'] ) : '';
-$show_cta = 'wide' !== $size && '' !== $cta_text;
+$show_cta = '' !== $cta_text;
 
 $image_url = isset( $attributes['imageUrl'] ) ? esc_url_raw( $attributes['imageUrl'] ) : '';
 $image_alt = isset( $attributes['imageAlt'] ) ? sanitize_text_field( $attributes['imageAlt'] ) : '';
@@ -42,6 +42,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 );
 ?>
 <div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped. ?>>
+	<div class="flash-sale-header__inner">
 	<div class="flash-sale-header__media">
 		<?php if ( $image_url ) : ?>
 			<img
@@ -62,6 +63,10 @@ $wrapper_attributes = get_block_wrapper_attributes(
 			<p class="flash-sale-header__subtitle"><?php echo $subtitle; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized above with wp_kses_post(). ?></p>
 		<?php endif; ?>
 
+		<?php if ( $has_countdown ) : ?>
+			<p class="flash-sale-header__countdown-label-static"><?php esc_html_e( 'Offer ends in', 'global-store' ); ?></p>
+		<?php endif; ?>
+
 		<div
 			class="flash-sale-header__countdown"
 			<?php if ( $has_countdown ) : ?>
@@ -76,7 +81,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 				</div>
 				<div class="flash-sale-header__countdown-unit" data-unit="hours">
 					<span class="flash-sale-header__countdown-value">00</span>
-					<span class="flash-sale-header__countdown-label"><?php esc_html_e( 'Hrs', 'global-store' ); ?></span>
+					<span class="flash-sale-header__countdown-label"><?php esc_html_e( 'Hours', 'global-store' ); ?></span>
 				</div>
 				<div class="flash-sale-header__countdown-unit" data-unit="minutes">
 					<span class="flash-sale-header__countdown-value">00</span>
@@ -95,7 +100,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 
 		<?php if ( $show_cta ) : ?>
 			<a
-				class="flash-sale-header__cta wp-block-button__link"
+				class="flash-sale-header__cta"
 				href="<?php echo esc_url( $cta_url ? $cta_url : '#' ); ?>"
 			>
 				<?php echo esc_html( $cta_text ); ?>
@@ -105,5 +110,10 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		<?php if ( $legal_text ) : ?>
 			<p class="flash-sale-header__legal"><?php echo $legal_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized above with wp_kses_post(). ?></p>
 		<?php endif; ?>
+	</div>
+
+	<?php if ( 'tall' === $size ) : ?>
+		<span class="flash-sale-header__chevron" aria-hidden="true"></span>
+	<?php endif; ?>
 	</div>
 </div>

@@ -1,0 +1,9 @@
+/**
+ * Tab panel styles (frontend + editor). The tab's own nav button (icon +
+ * title) is rendered by the parent Tabs block; this file only styles the
+ * panel that holds the tab's arbitrary InnerBlocks content.
+ */
+
+.tabs-block__panel {
+	padding: 1.5rem 0;
+}

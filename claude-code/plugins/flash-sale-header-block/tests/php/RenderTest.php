@@ -81,9 +81,9 @@ class RenderTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Per spec, the wide layout has no CTA button.
+	 * Per the reference design, the CTA button is shown on every layout.
 	 */
-	public function test_cta_is_hidden_on_the_wide_layout() {
+	public function test_cta_is_shown_on_the_wide_layout() {
 		$html = $this->render_block(
 			array(
 				'size'    => 'wide',
@@ -92,11 +92,12 @@ class RenderTest extends WP_UnitTestCase {
 			)
 		);
 
-		$this->assertStringNotContainsString( 'flash-sale-header__cta', $html );
+		$this->assertStringContainsString( 'flash-sale-header__cta', $html );
+		$this->assertStringContainsString( 'https://example.com', $html );
 	}
 
 	/**
-	 * Per spec, the medium layout includes a CTA button.
+	 * Per the reference design, the medium layout includes a CTA button.
 	 */
 	public function test_cta_is_shown_on_the_medium_layout() {
 		$html = $this->render_block(
@@ -109,6 +110,20 @@ class RenderTest extends WP_UnitTestCase {
 
 		$this->assertStringContainsString( 'flash-sale-header__cta', $html );
 		$this->assertStringContainsString( 'https://example.com', $html );
+	}
+
+	/**
+	 * With no CTA text set, no CTA button should be rendered on any layout.
+	 */
+	public function test_cta_is_hidden_when_no_cta_text_is_set() {
+		$html = $this->render_block(
+			array(
+				'size'    => 'wide',
+				'ctaText' => '',
+			)
+		);
+
+		$this->assertStringNotContainsString( 'flash-sale-header__cta', $html );
 	}
 
 	/**

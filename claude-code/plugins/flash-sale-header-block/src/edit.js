@@ -38,7 +38,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	} = attributes;
 
 	const blockProps = useBlockProps( {
-		className: `is-size-${ size }`,
+		className: `flash-sale-header is-size-${ size }`,
 	} );
 
 	const [ remaining, setRemaining ] = useState( () =>
@@ -70,7 +70,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		setAttributes( { imageId: 0, imageUrl: '', imageAlt: '' } );
 	};
 
-	const showCta = size !== 'wide';
+	const showCta = ctaText !== '';
 
 	return (
 		<>
@@ -123,10 +123,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( value ) =>
 							setAttributes( { ctaUrl: value } )
 						}
-						help={ __(
-							'Shown on the medium and tall layouts only.',
-							'global-store'
-						) }
 					/>
 				</PanelBody>
 
@@ -188,116 +184,134 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				<div className="flash-sale-header__media">
-					{ imageUrl ? (
-						<img
-							src={ imageUrl }
-							alt={ imageAlt }
-							className="flash-sale-header__image"
-						/>
-					) : (
-						<div className="flash-sale-header__media-placeholder">
-							{ __( 'Cutout image', 'global-store' ) }
-						</div>
-					) }
-				</div>
-
-				<div className="flash-sale-header__content">
-					<RichText
-						tagName="h2"
-						className="flash-sale-header__title"
-						value={ title }
-						onChange={ ( value ) =>
-							setAttributes( { title: value } )
-						}
-						placeholder={ __( 'The Flash Sale', 'global-store' ) }
-						allowedFormats={ [] }
-					/>
-					<RichText
-						tagName="p"
-						className="flash-sale-header__subtitle"
-						value={ subtitle }
-						onChange={ ( value ) =>
-							setAttributes( { subtitle: value } )
-						}
-						placeholder={ __(
-							'£1 a month for 12 months',
-							'global-store'
-						) }
-						allowedFormats={ [ 'core/bold', 'core/italic' ] }
-					/>
-
-					<div
-						className="flash-sale-header__countdown"
-						aria-hidden="true"
-					>
-						{ expiryDateTime ? (
-							<>
-								<div className="flash-sale-header__countdown-unit">
-									<span className="flash-sale-header__countdown-value">
-										{ remaining.days }
-									</span>
-									<span className="flash-sale-header__countdown-label">
-										{ __( 'Days', 'global-store' ) }
-									</span>
-								</div>
-								<div className="flash-sale-header__countdown-unit">
-									<span className="flash-sale-header__countdown-value">
-										{ remaining.hours }
-									</span>
-									<span className="flash-sale-header__countdown-label">
-										{ __( 'Hrs', 'global-store' ) }
-									</span>
-								</div>
-								<div className="flash-sale-header__countdown-unit">
-									<span className="flash-sale-header__countdown-value">
-										{ remaining.minutes }
-									</span>
-									<span className="flash-sale-header__countdown-label">
-										{ __( 'Mins', 'global-store' ) }
-									</span>
-								</div>
-								<div className="flash-sale-header__countdown-unit">
-									<span className="flash-sale-header__countdown-value">
-										{ remaining.seconds }
-									</span>
-									<span className="flash-sale-header__countdown-label">
-										{ __( 'Secs', 'global-store' ) }
-									</span>
-								</div>
-							</>
+				<div className="flash-sale-header__inner">
+					<div className="flash-sale-header__media">
+						{ imageUrl ? (
+							<img
+								src={ imageUrl }
+								alt={ imageAlt }
+								className="flash-sale-header__image"
+							/>
 						) : (
-							<p className="flash-sale-header__countdown-placeholder">
-								{ __(
-									'Set an expiry date to show a live countdown.',
-									'global-store'
-								) }
-							</p>
+							<div className="flash-sale-header__media-placeholder">
+								{ __( 'Cutout image', 'global-store' ) }
+							</div>
 						) }
 					</div>
 
-					{ showCta && (
-						<Button
-							className="flash-sale-header__cta is-editor-preview"
-							variant="primary"
-						>
-							{ ctaText || __( 'Shop Now', 'global-store' ) }
-						</Button>
-					) }
+					<div className="flash-sale-header__content">
+						<RichText
+							tagName="h2"
+							className="flash-sale-header__title"
+							value={ title }
+							onChange={ ( value ) =>
+								setAttributes( { title: value } )
+							}
+							placeholder={ __(
+								'The Flash Sale',
+								'global-store'
+							) }
+							allowedFormats={ [] }
+						/>
+						<RichText
+							tagName="p"
+							className="flash-sale-header__subtitle"
+							value={ subtitle }
+							onChange={ ( value ) =>
+								setAttributes( { subtitle: value } )
+							}
+							placeholder={ __(
+								'£1 a month for 12 months',
+								'global-store'
+							) }
+							allowedFormats={ [ 'core/bold', 'core/italic' ] }
+						/>
 
-					<RichText
-						tagName="p"
-						className="flash-sale-header__legal"
-						value={ legalText }
-						onChange={ ( value ) =>
-							setAttributes( { legalText: value } )
-						}
-						placeholder={ __(
-							'Fine print / legal disclaimer',
-							'global-store'
+						{ expiryDateTime && (
+							<p className="flash-sale-header__countdown-label-static">
+								{ __( 'Offer ends in', 'global-store' ) }
+							</p>
 						) }
-						allowedFormats={ [ 'core/link' ] }
-					/>
+
+						<div
+							className="flash-sale-header__countdown"
+							aria-hidden="true"
+						>
+							{ expiryDateTime ? (
+								<>
+									<div className="flash-sale-header__countdown-unit">
+										<span className="flash-sale-header__countdown-value">
+											{ remaining.days }
+										</span>
+										<span className="flash-sale-header__countdown-label">
+											{ __( 'Days', 'global-store' ) }
+										</span>
+									</div>
+									<div className="flash-sale-header__countdown-unit">
+										<span className="flash-sale-header__countdown-value">
+											{ remaining.hours }
+										</span>
+										<span className="flash-sale-header__countdown-label">
+											{ __( 'Hours', 'global-store' ) }
+										</span>
+									</div>
+									<div className="flash-sale-header__countdown-unit">
+										<span className="flash-sale-header__countdown-value">
+											{ remaining.minutes }
+										</span>
+										<span className="flash-sale-header__countdown-label">
+											{ __( 'Mins', 'global-store' ) }
+										</span>
+									</div>
+									<div className="flash-sale-header__countdown-unit">
+										<span className="flash-sale-header__countdown-value">
+											{ remaining.seconds }
+										</span>
+										<span className="flash-sale-header__countdown-label">
+											{ __( 'Secs', 'global-store' ) }
+										</span>
+									</div>
+								</>
+							) : (
+								<p className="flash-sale-header__countdown-placeholder">
+									{ __(
+										'Set an expiry date to show a live countdown.',
+										'global-store'
+									) }
+								</p>
+							) }
+						</div>
+
+						{ showCta && (
+							<Button
+								className="flash-sale-header__cta is-editor-preview"
+								variant="primary"
+							>
+								{ ctaText || __( 'Shop Now', 'global-store' ) }
+							</Button>
+						) }
+
+						<RichText
+							tagName="p"
+							className="flash-sale-header__legal"
+							value={ legalText }
+							onChange={ ( value ) =>
+								setAttributes( { legalText: value } )
+							}
+							placeholder={ __(
+								'Fine print / legal disclaimer',
+								'global-store'
+							) }
+							allowedFormats={ [ 'core/link' ] }
+						/>
+					</div>
+
+					{ size === 'tall' && (
+						<span
+							className="flash-sale-header__chevron"
+							aria-hidden="true"
+						/>
+					) }
 				</div>
 			</div>
 		</>

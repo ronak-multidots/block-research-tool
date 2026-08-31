@@ -1,0 +1,22 @@
+/**
+ * Editor-only styles for the Tabs block (not loaded on the frontend).
+ */
+
+.wp-block-global-store-tabs {
+	min-height: 100px;
+
+	.tabs-block__nav {
+		margin-bottom: 0;
+	}
+
+	.tabs-block__tab-btn {
+		// The nav is a synthesized preview built from sibling Tab blocks'
+		// attributes (see edit.js), not a real InnerBlocks appender, so give
+		// it the same focus/hover affordance as an editable field.
+		border-radius: 2px;
+
+		&:hover {
+			background: rgba(0, 0, 0, 0.03);
+		}
+	}
+}
