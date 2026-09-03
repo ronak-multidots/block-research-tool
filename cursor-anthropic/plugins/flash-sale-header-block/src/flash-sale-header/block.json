@@ -1,0 +1,118 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "global-store/flash-sale-header",
+	"version": "1.0.0",
+	"title": "Global Store Flash Sale Header",
+	"category": "design",
+	"icon": "megaphone",
+	"description": "A promotional header with a live countdown timer, call to action and cutout imagery. Adapts between wide, medium and tall layouts.",
+	"keywords": [ "flash sale", "countdown", "promotion", "header", "offer" ],
+	"textdomain": "flash-sale-header-block",
+	"supports": {
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true,
+			"link": false
+		},
+		"spacing": {
+			"margin": [ "top", "bottom" ],
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		},
+		"interactivity": {
+			"clientNavigation": false
+		}
+	},
+	"attributes": {
+		"size": {
+			"type": "string",
+			"enum": [ "auto", "wide", "medium", "tall" ],
+			"default": "auto"
+		},
+		"title": {
+			"type": "string",
+			"default": "The Flash Sale"
+		},
+		"subtitle": {
+			"type": "string",
+			"default": "£1 a month for 12 months"
+		},
+		"countdownLabel": {
+			"type": "string",
+			"default": "Offer ends in"
+		},
+		"expiryDate": {
+			"type": "string",
+			"default": ""
+		},
+		"expiredMessage": {
+			"type": "string",
+			"default": "This offer has ended."
+		},
+		"hideWhenExpired": {
+			"type": "boolean",
+			"default": false
+		},
+		"ctaText": {
+			"type": "string",
+			"default": "Subscribe now"
+		},
+		"ctaUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"ctaOpensInNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"finePrint": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "number",
+			"default": 0
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"imagePosition": {
+			"type": "string",
+			"enum": [ "center", "top", "bottom", "left", "right" ],
+			"default": "center"
+		},
+		"accentColor": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"example": {
+		"attributes": {
+			"size": "wide",
+			"title": "The Flash Sale",
+			"subtitle": "£1 a month for 12 months",
+			"countdownLabel": "Offer ends in",
+			"ctaText": "Subscribe now",
+			"ctaUrl": "https://example.com/subscribe",
+			"finePrint": "£1 a month for 12 months, £12 a month thereafter. This offer is only available to new subscribers."
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

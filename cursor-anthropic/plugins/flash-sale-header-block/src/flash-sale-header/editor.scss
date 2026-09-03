@@ -1,0 +1,44 @@
+/**
+ * Editor-only styles.
+ *
+ * The block renders with its front-end stylesheet inside the canvas, so
+ * this file only covers editing affordances: placeholders, the inspector
+ * image preview and making RichText fields discoverable while empty.
+ */
+
+$root: ".wp-block-global-store-flash-sale-header";
+
+.gsfsh-image-preview {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin-bottom: 12px;
+	border-radius: 2px;
+	background-color: #0f1020;
+}
+
+.editor-styles-wrapper #{$root} {
+
+	/* The CTA is a RichText span here, but should still look like a button. */
+	#{$root}__cta {
+		cursor: text;
+	}
+
+	[data-rich-text-placeholder]::after {
+		opacity: 0.6;
+	}
+
+	#{$root}__title:empty,
+	#{$root}__subtitle:empty,
+	#{$root}__fine-print:empty,
+	#{$root}__cta:empty {
+		outline: 1px dashed rgb(255 255 255 / 35%);
+		outline-offset: 2px;
+		min-width: 6rem;
+		min-height: 1em;
+	}
+
+	.components-placeholder {
+		color: initial;
+	}
+}

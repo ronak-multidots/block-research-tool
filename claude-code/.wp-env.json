@@ -1,0 +1,11 @@
+{
+	"core": null,
+	"phpVersion": "8.1",
+	"plugins": [ "./plugins/flash-sale-header-block", "./plugins/tabs-block" ],
+	"config": {
+		"WP_DEBUG": true
+	},
+	"lifecycleScripts": {
+		"afterStart": "PATH=\"$PWD/plugins/tabs-block/node_modules/.bin:$PATH\" wp-env run tests-cli wp plugin activate flash-sale-header-block tabs-block && PATH=\"$PWD/plugins/tabs-block/node_modules/.bin:$PATH\" wp-env run tests-cli wp theme activate twentytwentyfive"
+	}
+}
