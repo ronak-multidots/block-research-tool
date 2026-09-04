@@ -1,0 +1,344 @@
+/**
+ * Front-end and shared editor styles for the Flash Sale Header block.
+ *
+ * Layout is expressed once as mixins and applied either from an explicit
+ * `.is-size-*` class or, when the author leaves the size on "auto", from CSS
+ * container queries against the block's own inline size.
+ */
+
+$root: ".wp-block-global-store-flash-sale-header";
+
+$bp-medium: 520px;
+$bp-wide: 900px;
+
+@mixin layout-tall {
+	grid-template-columns: 1fr;
+	grid-template-areas:
+		"media"
+		"content";
+
+	#{$root}__media {
+		aspect-ratio: 4 / 3;
+		mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+	}
+
+	#{$root}__content {
+		padding-top: 0;
+		text-align: center;
+		align-items: center;
+	}
+
+	#{$root}__cta {
+		width: 100%;
+	}
+}
+
+@mixin layout-medium {
+	grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+	grid-template-areas: "content media";
+
+	#{$root}__media {
+		aspect-ratio: auto;
+		mask-image: linear-gradient(to left, #000 0%, #000 55%, transparent 100%);
+	}
+
+	#{$root}__content {
+		text-align: start;
+		align-items: flex-start;
+	}
+
+	#{$root}__cta {
+		width: auto;
+	}
+}
+
+@mixin layout-wide {
+	grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+	grid-template-areas: "content media";
+
+	#{$root}__title {
+		font-size: var(--gsfsh-title-size-wide);
+	}
+
+	#{$root}__content {
+		text-align: start;
+		align-items: flex-start;
+		padding-block: clamp(1.5rem, 4cqi, 3.5rem);
+	}
+
+	#{$root}__media {
+		aspect-ratio: auto;
+		mask-image: linear-gradient(to left, #000 0%, #000 62%, transparent 100%);
+	}
+
+	#{$root}__cta {
+		width: auto;
+	}
+}
+
+#{$root} {
+	--gsfsh-accent: #ffa500;
+	--gsfsh-accent-contrast: #14141e;
+	--gsfsh-surface: #0a0a0a;
+	--gsfsh-text: #fff;
+	--gsfsh-muted: rgb(255 255 255 / 68%);
+	--gsfsh-image-position: center;
+	--gsfsh-gap: clamp(0.75rem, 2cqi, 1.5rem);
+	--gsfsh-pad: clamp(1.25rem, 3cqi, 2.75rem);
+	--gsfsh-title-size: clamp(1.35rem, 4.5cqi, 2rem);
+	--gsfsh-title-size-wide: clamp(1.75rem, 3.2cqi, 3rem);
+	--gsfsh-radius: 2px;
+
+	container-type: inline-size;
+	container-name: gsfsh;
+
+	position: relative;
+	overflow: hidden;
+	box-sizing: border-box;
+	background-color: var(--gsfsh-surface);
+	color: var(--gsfsh-text);
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
+	}
+
+	&__inner {
+		display: grid;
+		position: relative;
+		min-height: 100%;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--gsfsh-gap);
+		grid-area: content;
+		padding: var(--gsfsh-pad);
+		position: relative;
+		z-index: 2;
+	}
+
+	&__title {
+		margin: 0;
+		font-family: Georgia, "Times New Roman", times, serif;
+		font-size: var(--gsfsh-title-size);
+		font-weight: 700;
+		line-height: 1.1;
+		letter-spacing: -0.01em;
+		color: inherit;
+	}
+
+	&__subtitle {
+		margin: calc(var(--gsfsh-gap) * -0.5) 0 0;
+		font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+		font-size: clamp(0.9rem, 2cqi, 1.15rem);
+		line-height: 1.3;
+		color: inherit;
+	}
+
+	&__countdown {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		width: 100%;
+	}
+
+	&__countdown-label {
+		margin: 0;
+		font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+		font-size: clamp(0.95rem, 2.2cqi, 1.3rem);
+		line-height: 1.2;
+	}
+
+	&__sr-only {
+		position: absolute !important;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		border: 0;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	&__countdown-hint {
+		margin: 0;
+		font-size: 0.8125rem;
+		font-style: italic;
+		color: var(--gsfsh-muted);
+	}
+
+	&__units {
+		display: flex;
+		flex-wrap: wrap;
+		gap: clamp(0.5rem, 2cqi, 1.25rem);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+
+		&[hidden] {
+			display: none;
+		}
+	}
+
+	&__unit {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-width: 2.5rem;
+		gap: 0.15rem;
+		position: relative;
+
+		+ #{$root}__unit::before {
+			content: "";
+			position: absolute;
+			inset-block: 0.1rem 0.9rem;
+			inset-inline-start: calc(clamp(0.5rem, 2cqi, 1.25rem) / -2);
+			border-inline-start: 1px solid rgb(255 255 255 / 25%);
+		}
+	}
+
+	&__unit-value {
+		font-size: clamp(1.1rem, 3cqi, 1.6rem);
+		font-weight: 600;
+		font-variant-numeric: tabular-nums;
+		line-height: 1;
+	}
+
+	&__unit-label {
+		font-size: clamp(0.5rem, 1.2cqi, 0.7rem);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--gsfsh-muted);
+	}
+
+	&__expired {
+		margin: 0;
+		font-size: 0.95rem;
+		font-weight: 600;
+
+		&[hidden] {
+			display: none;
+		}
+	}
+
+	&__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 2.25rem;
+		padding: 0.5rem 1.75rem;
+		border-radius: var(--gsfsh-radius);
+		background-color: var(--gsfsh-accent);
+		color: var(--gsfsh-accent-contrast);
+		font-size: clamp(0.75rem, 1.8cqi, 0.9rem);
+		font-weight: 700;
+		text-decoration: none;
+		transition: filter 120ms ease-in-out;
+
+		&:hover,
+		&:focus {
+			color: var(--gsfsh-accent-contrast);
+			filter: brightness(1.08);
+		}
+
+		&:focus-visible {
+			outline: 2px solid currentcolor;
+			outline-offset: 2px;
+		}
+	}
+
+	&__fine-print {
+		margin: 0;
+		max-width: 46ch;
+		font-size: clamp(0.55rem, 1.3cqi, 0.7rem);
+		line-height: 1.45;
+		color: var(--gsfsh-muted);
+
+		a {
+			color: inherit;
+		}
+	}
+
+	&__media {
+		grid-area: media;
+		position: relative;
+		overflow: hidden;
+		align-self: stretch;
+		min-width: 0;
+	}
+
+	&__image {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: var(--gsfsh-image-position);
+	}
+
+	&.is-size-tall #{$root}__inner {
+
+		@include layout-tall;
+	}
+
+	&.is-size-medium #{$root}__inner {
+
+		@include layout-medium;
+	}
+
+	&.is-size-wide #{$root}__inner {
+
+		@include layout-wide;
+	}
+
+	&.is-size-auto #{$root}__inner {
+
+		@include layout-tall;
+	}
+}
+
+@container gsfsh (min-width: #{$bp-medium}) {
+	#{$root}.is-size-auto #{$root}__inner {
+
+		@include layout-medium;
+	}
+}
+
+@container gsfsh (min-width: #{$bp-wide}) {
+	#{$root}.is-size-auto #{$root}__inner {
+
+		@include layout-wide;
+	}
+}
+
+@supports not (container-type: inline-size) {
+
+	@media (min-width: #{$bp-medium}) {
+		#{$root}.is-size-auto #{$root}__inner {
+
+			@include layout-medium;
+		}
+	}
+
+	@media (min-width: #{$bp-wide}) {
+		#{$root}.is-size-auto #{$root}__inner {
+
+			@include layout-wide;
+		}
+	}
+}
+
+#{$root}#{$root}:not(.has-cutout-image) #{$root}__inner {
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas: "content";
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#{$root} #{$root}__cta {
+		transition: none;
+	}
+}

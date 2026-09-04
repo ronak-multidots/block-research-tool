@@ -1,0 +1,45 @@
+/**
+ * Editor-only styles.
+ */
+
+$root: ".wp-block-global-store-flash-sale-header";
+
+.gsfsh-image-preview {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 12px 0;
+	border-radius: 2px;
+	background-color: #0a0a0a;
+}
+
+.gsfsh-size-toggles {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.editor-styles-wrapper #{$root} {
+
+	#{$root}__cta {
+		cursor: text;
+	}
+
+	[data-rich-text-placeholder]::after {
+		opacity: 0.6;
+	}
+
+	#{$root}__title:empty,
+	#{$root}__subtitle:empty,
+	#{$root}__fine-print:empty,
+	#{$root}__cta:empty {
+		outline: 1px dashed rgb(255 255 255 / 35%);
+		outline-offset: 2px;
+		min-width: 6rem;
+		min-height: 1em;
+	}
+
+	.components-placeholder {
+		color: initial;
+	}
+}

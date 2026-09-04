@@ -1,0 +1,77 @@
+/**
+ * Editor-only styles.
+ *
+ * The tab list is built from divs rather than buttons while editing, so the shared
+ * styles in `style.scss` do most of the work and only the editing affordances are
+ * described here.
+ */
+
+$root: ".wp-block-global-store-tabs";
+
+.editor-styles-wrapper #{$root} {
+	/* Inactive tabs are plain buttons; strip the editor's own button styling. */
+	&__tab-switch {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: none;
+		color: inherit;
+		font: inherit;
+		cursor: pointer;
+	}
+
+	&__tab-label:focus {
+		outline: none;
+	}
+
+	&__tab .rich-text[data-rich-text-placeholder]::after {
+		opacity: 0.6;
+	}
+
+	&__add-tab {
+		flex: 0 0 auto;
+		align-self: center;
+		margin-block-end: 0.5rem;
+		opacity: 0.75;
+
+		&:hover,
+		&:focus {
+			opacity: 1;
+		}
+	}
+
+	&__panel[hidden] {
+		display: none;
+	}
+
+	/* Without a minimum height an empty panel collapses and cannot be clicked into. */
+	&__panel {
+		min-height: 2.5rem;
+	}
+}
+
+.editor-styles-wrapper #{$root}.is-orientation-vertical #{$root}__add-tab {
+	align-self: stretch;
+}
+
+/* The icon picker lives in the sidebar, outside the styled content area. */
+#{$root}__icon-grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 2px;
+}
+
+/* Qualified with the component class so it outweighs the default Button styles. */
+.components-button#{$root}__icon-choice {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 36px;
+	padding: 0;
+
+	#{$root}__icon {
+		width: 20px;
+		height: 20px;
+	}
+}

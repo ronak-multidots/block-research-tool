@@ -1,0 +1,308 @@
+/**
+ * Front-end and shared editor styles for the Tabs block.
+ *
+ * The tab list is styled by class rather than by element so the same rules dress both
+ * the real `<button role="tab">` on the front end and the editable tab in the editor.
+ */
+
+$root: ".wp-block-global-store-tabs";
+
+#{$root} {
+	--gstb-accent: #ee6c2d;
+	--gstb-accent-contrast: #fff;
+	--gstb-tab-color: #6b7280;
+	--gstb-tab-color-active: #16181d;
+	--gstb-line: #e6e8ec;
+	--gstb-pill-surface: #f3f4f6;
+	--gstb-tab-gap: clamp(1.25rem, 4cqi, 3.25rem);
+	--gstb-tab-font-size: 0.975rem;
+	--gstb-icon-size: 1.375rem;
+	--gstb-indicator: 3px;
+	--gstb-panel-gap: clamp(1.75rem, 4cqi, 2.75rem);
+	--gstb-card-radius: 1.5rem;
+	--gstb-card-shadow: 0 12px 40px rgba(16, 24, 40, 0.08);
+
+	/* Establishes the query container the compact tab list responds to. */
+	container-type: inline-size;
+	container-name: gstb;
+
+	box-sizing: border-box;
+	background-color: #fff;
+	border-radius: var(--gstb-card-radius);
+	box-shadow: var(--gstb-card-shadow);
+	padding: clamp(1.75rem, 5cqi, 3.25rem) clamp(1.5rem, 4cqi, 3rem);
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
+	}
+
+	&__list {
+		display: flex;
+		align-items: flex-end;
+		gap: var(--gstb-tab-gap);
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid var(--gstb-line);
+
+		/* Long tab lists scroll sideways rather than wrapping into a ragged block. */
+		overflow-x: auto;
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	&__tab {
+		display: flex;
+		position: relative;
+		flex: 0 0 auto;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.45rem;
+		margin: 0;
+		padding: 0.25rem 0.15rem 0.85rem;
+		border: 0;
+		border-radius: 0;
+		background: none;
+		box-shadow: none;
+		color: var(--gstb-tab-color);
+		font-family: inherit;
+		font-size: var(--gstb-tab-font-size);
+		font-weight: 500;
+		line-height: 1.3;
+		text-align: center;
+		text-decoration: none;
+		cursor: pointer;
+		transition: color 120ms ease;
+
+		&::after {
+			content: "";
+			position: absolute;
+			inset-inline: 0;
+			bottom: -1px;
+			height: var(--gstb-indicator);
+			border-radius: var(--gstb-indicator);
+			background-color: transparent;
+			transition: background-color 120ms ease;
+		}
+
+		&:hover {
+			color: var(--gstb-tab-color-active);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--gstb-accent);
+			outline-offset: 3px;
+		}
+
+		&[aria-selected="true"],
+		&.is-active {
+			color: var(--gstb-tab-color-active);
+			font-weight: 700;
+
+			&::after {
+				background-color: var(--gstb-accent);
+			}
+
+			#{$root}__tab-icon {
+				color: var(--gstb-accent);
+			}
+		}
+	}
+
+	&__tab-icon {
+		display: inline-flex;
+		color: var(--gstb-tab-color);
+		transition: color 120ms ease;
+	}
+
+	&__icon {
+		display: block;
+		width: var(--gstb-icon-size);
+		height: var(--gstb-icon-size);
+	}
+
+	&__tab-label {
+		display: block;
+		white-space: nowrap;
+	}
+
+	&__panel {
+		padding-block-start: var(--gstb-panel-gap);
+
+		&[hidden] {
+			display: none;
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--gstb-accent);
+			outline-offset: 4px;
+		}
+
+		> *:first-child {
+			margin-block-start: 0;
+		}
+
+		> *:last-child {
+			margin-block-end: 0;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		.wp-block-heading {
+			margin-block: 0 0.85rem;
+			color: var(--gstb-tab-color-active);
+			font-weight: 700;
+			letter-spacing: -0.03em;
+			line-height: 1.15;
+		}
+
+		h3,
+		h3.wp-block-heading {
+			font-size: clamp(1.75rem, 4.5cqi, 2.65rem);
+		}
+
+		p {
+			margin-block: 0;
+			color: #5c6370;
+			font-size: 1.05rem;
+			line-height: 1.65;
+		}
+
+		.wp-block-columns {
+			align-items: center;
+			margin-block: 0;
+			gap: clamp(1.5rem, 4cqi, 2.75rem);
+		}
+
+		.wp-block-image {
+			margin: 0;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+
+		#{$root}__illustration,
+		svg#{$root}__illustration {
+			display: block;
+			width: min(100%, 240px);
+			height: auto;
+			margin-inline: auto;
+		}
+	}
+
+	/*
+	 * `safe` keeps the first tab reachable when a centred list overflows: without it the
+	 * overflowing edge is clipped and cannot be scrolled back to.
+	 */
+	&.is-orientation-horizontal {
+		&.is-tabs-aligned-start #{$root}__list,
+		&.is-tabs-aligned-left #{$root}__list {
+			justify-content: flex-start;
+		}
+
+		&.is-tabs-aligned-center #{$root}__list {
+			justify-content: safe center;
+		}
+
+		&.is-tabs-aligned-end #{$root}__list,
+		&.is-tabs-aligned-right #{$root}__list {
+			justify-content: safe flex-end;
+		}
+	}
+
+	&.is-orientation-vertical {
+		display: grid;
+		grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+		gap: var(--gstb-panel-gap);
+		align-items: start;
+
+		#{$root}__list {
+			flex-direction: column;
+			align-items: stretch;
+			border-bottom: 0;
+			border-inline-end: 1px solid var(--gstb-line);
+			overflow-x: visible;
+		}
+
+		#{$root}__tab {
+			flex-direction: row;
+			justify-content: flex-start;
+			gap: 0.6rem;
+			padding: 0.7rem 1.1rem 0.7rem 0.25rem;
+			text-align: start;
+
+			&::after {
+				inset-inline: auto -1px;
+				inset-block: 0;
+				width: var(--gstb-indicator);
+				height: auto;
+			}
+		}
+
+		#{$root}__panel {
+			padding-block-start: 0;
+		}
+	}
+
+	&.is-tab-style-pills {
+		#{$root}__list {
+			gap: 0.5rem;
+			border: 0;
+		}
+
+		#{$root}__tab {
+			flex-direction: row;
+			gap: 0.5rem;
+			padding: 0.55rem 1.05rem;
+			border-radius: 999px;
+			background-color: var(--gstb-pill-surface);
+
+			&::after {
+				display: none;
+			}
+
+			&[aria-selected="true"],
+			&.is-active {
+				background-color: var(--gstb-accent);
+				color: var(--gstb-accent-contrast);
+
+				#{$root}__tab-icon {
+					color: currentColor;
+				}
+			}
+		}
+	}
+}
+
+@container gstb (max-width: 480px) {
+	#{$root}__list {
+		--gstb-tab-gap: 1.25rem;
+	}
+
+	#{$root}__tab {
+		--gstb-tab-font-size: 0.875rem;
+		--gstb-icon-size: 1.25rem;
+	}
+}
+
+/* A printed page has no way to switch tabs, so show every panel. */
+@media print {
+	#{$root}__panel[hidden] {
+		display: block;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#{$root}__tab,
+	#{$root}__tab-icon {
+		transition: none;
+	}
+}

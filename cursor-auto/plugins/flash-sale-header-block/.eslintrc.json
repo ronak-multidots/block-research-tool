@@ -1,0 +1,26 @@
+{
+  "root": true,
+  "extends": ["plugin:@wordpress/eslint-plugin/recommended"],
+  "settings": {
+    "jsdoc": {
+      "mode": "typescript"
+    }
+  },
+  "rules": {
+    "@wordpress/i18n-text-domain": [
+      "error",
+      { "allowedTextDomain": "flash-sale-header-block" }
+    ],
+    "@wordpress/no-unsafe-wp-apis": "error"
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*.js", "*.config.js", "jest.config.js"],
+      "env": { "jest": true, "node": true },
+      "rules": {
+        "@wordpress/no-unused-vars-before-return": "off",
+        "jsdoc/require-param": "off"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "global-store/tab",
+	"version": "1.0.0",
+	"title": "Tab",
+	"category": "design",
+	"description": "A single tab panel. Add any blocks inside it.",
+	"textdomain": "tabs-block",
+	"parent": [ "global-store/tabs" ],
+	"supports": {
+		"anchor": false,
+		"html": false,
+		"reusable": false,
+		"spacing": {
+			"padding": true
+		}
+	},
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": ""
+		},
+		"icon": {
+			"type": "string",
+			"enum": [
+				"none",
+				"target",
+				"bolt",
+				"compass",
+				"rocket",
+				"star",
+				"heart",
+				"shield",
+				"sparkle",
+				"lightbulb",
+				"users",
+				"chart",
+				"check-circle",
+				"globe",
+				"clock",
+				"layers",
+				"shopping-bag"
+			],
+			"default": "none"
+		},
+		"slug": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"render": "file:./render.php"
+}

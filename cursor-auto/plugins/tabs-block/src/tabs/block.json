@@ -1,0 +1,151 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "global-store/tabs",
+	"version": "1.0.0",
+	"title": "Global Store Tabs",
+	"category": "design",
+	"description": "Group content into tabs. Every panel is a blank canvas, so any blocks can go inside a tab.",
+	"keywords": [ "tabs", "tab", "accordion", "panels", "toggle" ],
+	"textdomain": "tabs-block",
+	"allowedBlocks": [ "global-store/tab" ],
+	"supports": {
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true,
+			"link": false
+		},
+		"spacing": {
+			"margin": [ "top", "bottom" ],
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		},
+		"interactivity": {
+			"clientNavigation": false
+		}
+	},
+	"attributes": {
+		"defaultActiveTab": {
+			"type": "number",
+			"default": 0
+		},
+		"orientation": {
+			"type": "string",
+			"enum": [ "horizontal", "vertical" ],
+			"default": "horizontal"
+		},
+		"tabStyle": {
+			"type": "string",
+			"enum": [ "underline", "pills" ],
+			"default": "underline"
+		},
+		"alignment": {
+			"type": "string",
+			"enum": [ "start", "center", "end", "left", "right" ],
+			"default": "center"
+		},
+		"showIcons": {
+			"type": "boolean",
+			"default": true
+		},
+		"accentColor": {
+			"type": "string",
+			"default": ""
+		},
+		"accessibleLabel": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"example": {
+		"attributes": {
+			"alignment": "center"
+		},
+		"innerBlocks": [
+			{
+				"name": "global-store/tab",
+				"attributes": {
+					"label": "Our Mission",
+					"icon": "target"
+				},
+				"innerBlocks": [
+					{
+						"name": "core/columns",
+						"innerBlocks": [
+							{
+								"name": "core/column",
+								"attributes": { "width": "58%" },
+								"innerBlocks": [
+									{
+										"name": "core/heading",
+										"attributes": {
+											"level": 3,
+											"content": "Serving People. Solving Problems."
+										}
+									},
+									{
+										"name": "core/paragraph",
+										"attributes": {
+											"content": "Our Mission: To serve people by solving problems that improve productivity, increase prosperity, and create peace of mind."
+										}
+									}
+								]
+							},
+							{
+								"name": "core/column",
+								"attributes": { "width": "42%" },
+								"innerBlocks": [
+									{
+										"name": "core/image"
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "global-store/tab",
+				"attributes": {
+					"label": "Our Superpowers",
+					"icon": "bolt"
+				},
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"attributes": {
+							"content": "What we are uncommonly good at, and how we put it to work."
+						}
+					}
+				]
+			},
+			{
+				"name": "global-store/tab",
+				"attributes": {
+					"label": "What We Stand For",
+					"icon": "sparkle"
+				},
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"attributes": {
+							"content": "The principles we hold to when the easy answer and the right answer disagree."
+						}
+					}
+				]
+			}
+		]
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}
