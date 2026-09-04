@@ -121,19 +121,6 @@ Open the PNGs directly, or serve `docs/responsive.html` / `docs/layouts.html` to
 
 ![Cursor Auto Tabs layouts](cursor-auto/plugins/tabs-block/docs/layouts.png)
 
-## Suggested evaluation scorecard
-
-Score each tool 1–5. Weight time only after quality clears the bar.
-
-| Question | Claude Code | Cursor + Anthropic | Cursor Auto |
-| --- | --- | --- | --- |
-| Time to a demo-able block | | | |
-| Visual fidelity to the brief | | | |
-| Responsive behaviour (desktop / tablet / mobile) | | | |
-| WordPress security / escaping | | | |
-| Test coverage we would keep | | | |
-| Would we merge this without a rewrite? | | | |
-| **Weighted total** | | | |
 
 ## Regenerating the screenshots
 
