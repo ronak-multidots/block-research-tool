@@ -2,6 +2,12 @@
 
 Accessible, server-rendered Gutenberg tabs whose panels accept any inner blocks. Tab lists can be aligned left, center or right — the same justification options as `core/tabs`.
 
+| Desktop 1440 | Tablet 768 | Mobile 390 |
+| --- | --- | --- |
+| ![Desktop](docs/desktop.png) | ![Tablet](docs/tablet.png) | ![Mobile](docs/mobile.png) |
+
+![Underline, pills, and vertical variants](docs/layouts.png)
+
 ## Blocks
 
 - `global-store/tabs` — container (tab list + panels)

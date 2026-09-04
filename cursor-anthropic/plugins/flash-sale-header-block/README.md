@@ -4,6 +4,10 @@ A secure, server-rendered Gutenberg block (`global-store/flash-sale-header`) tha
 
 ![The three layouts, locked and resolved automatically by container queries](docs/layouts.png)
 
+| Desktop 1440 | Tablet 768 | Mobile 390 |
+| --- | --- | --- |
+| ![Desktop](docs/desktop.png) | ![Tablet](docs/tablet.png) | ![Mobile](docs/mobile.png) |
+
 ## Layouts
 
 | Size     | Composition                                                              |

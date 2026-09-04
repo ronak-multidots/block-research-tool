@@ -5,6 +5,12 @@ countdown-driven flash sale header in one of three layouts — `wide`,
 `medium`, `tall` — chosen from the Inspector Controls and auto-adapted via
 CSS Container Queries.
 
+| Desktop 1440 | Tablet 768 | Mobile 390 |
+| --- | --- | --- |
+| ![Desktop](docs/desktop.png) | ![Tablet](docs/tablet.png) | ![Mobile](docs/mobile.png) |
+
+![Locked sizes and width-adapted layouts](docs/layouts.png)
+
 ## Structure
 
 ```
